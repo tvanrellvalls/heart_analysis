@@ -3,8 +3,11 @@ title: "PRA2"
 author: "Toni Vanrell i Guillem Mir"
 date: "31/5/2021"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
+header-includes:
+- \usepackage{placeins}
 ---
 
 ```{r setup, include=FALSE}
@@ -88,16 +91,16 @@ Com podem veure, no hi ha valors nuls. Tanmateix cal clarificar que si ens trobe
 
 ### 3.2. Valors atípics.
 ````{r valors atípics}
-boxplot(data2$age)
+boxplot(data2$age, main = "Boxplot Edat")
 bpage <- quantile(data2$age, 0.75) - quantile(data2$age, 0.25)
 sum(data2$age > median(data2$age)+3*bpage)
-boxplot(data2$bloodPressure)
+boxplot(data2$bloodPressure, main = "Boxplot pressió sanguínea")
 bprq <- quantile(data2$bloodPressure, 0.75) - quantile(data2$bloodPressure, 0.25)
 sum(data2$bloodPressure > median(data2$bloodPressure)+3*bprq)
-boxplot(data2$cholesterol)
+boxplot(data2$cholesterol, main = "Boxplot colesterol")
 chorq <- quantile(data2$cholesterol, 0.75) - quantile(data2$cholesterol, 0.25)
 sum(data2$cholesterol > median(data2$cholesterol)+3*chorq)
-boxplot(data2$maxHeartRate)
+boxplot(data2$maxHeartRate, main = "Boxplot freqüència cardiaca")
 mhrrq <- quantile(data2$maxHeartRate, 0.75) - quantile(data2$maxHeartRate, 0.25)
 sum(data2$maxHeartRate < median(data2$maxHeartRate)-3*mhrrq)
 ````
@@ -138,10 +141,10 @@ normtest[2,2]<-shapiro.test(heart$bloodPressure)$p.value  # No hi ha normalitat
 normtest[3,2]<-shapiro.test(heart$cholesterol)$p.value  # No hi ha normalitat
 normtest[4,2]<-shapiro.test(heart$maxHeartRate)$p.value  # No hi ha normalitat
 normtest
-hist(heart$age)
-hist(heart$bloodPressure)
-hist(heart$cholesterol)
-hist(heart$maxHeartRate)
+hist(heart$age, main = "Histograma edat", ylab = "Freqüència", xlab = "Edat")
+hist(heart$bloodPressure, main = "Histograma pressió sanguínea", ylab = "Freqüència", xlab = "Pressió sanguínea")
+hist(heart$cholesterol, main = "Histograma colesterol", ylab = "Freqüència", xlab = "Colesterol")
+hist(heart$maxHeartRate, main = "Histograma freqüència cardiaca", ylab = "Freqüència", xlab = "Freqüència cardiaca")
 ````
 Com podem veure pels resultats dels tests Shapiro-Wilks i corroborar per la forma dels histogrames, ninguna de les variables quantitatives presenta normalitat per les seves distribucions. El que comportarà aquesta situació és la utilització d'anàlisis no paramètrics.
 
@@ -247,15 +250,12 @@ Anem a veure les taules de contingència usades en el 4 test de Chi-quadrat fets
 # Target-Sex:
 Target_Sex = table(heart$sex,heart$target) 
 print(Target_Sex)
-
 # Target-ChestPain:
 Target_ChestPain = table(heart$chestPain,heart$target) 
 print(Target_ChestPain)
-
 # Target-Bloodsugar:
 Target_Bloodsugar = table(heart$bloodSugar,heart$target) 
 print(Target_Bloodsugar)
-
 # Target-IndAngina:
 Target_IndAngina = table(heart$indAngina,heart$target) 
 print(Target_IndAngina)
@@ -296,20 +296,17 @@ El codi complet amb R està compartit al Github.
 
 ## Taula de contribucions al treball:
 
-$$
-\begin{table}[H]
+
+\begin{table}[!h]
 \centering
 \begin{tabular}{|c|c|}
 \hline
-\rowcolor[HTML]{DAE8FC} 
 \textbf{Contribucions}    & \textbf{Signa} \\ \hline
 Investigació prèvia       & GMF, AVV       \\ \hline
 Redacció de les respostes & GMF, AVV       \\ \hline
 Desenvolupament codi      & GMF, AVV       \\ \hline
 \end{tabular}
 \end{table}
-$$
-
 
 
 
